@@ -14,9 +14,9 @@ from manage import *
 
 
 # Register blueprints.
-app.register_blueprint(manage_conversations)
-app.register_blueprint(manage_conversation)
-app.register_blueprint(manage_conversation_import)
+app.register_blueprint(bp_conversation)
+app.register_blueprint(bp_conversation_add)
+app.register_blueprint(bp_conversation_import)
 
 
 if __name__ == "__main__":

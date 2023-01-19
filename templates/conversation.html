@@ -1,0 +1,20 @@
+{% include 'header.html' %}
+
+<main class="container mt-5">
+  <div class="container mb-5">
+    <h1>Conversations</h1>
+  </div>
+  {% for conv in conversations %}
+    <ul class="list-group list-group-horizontal mb-2">
+      <a href="" class="list-group-item fullwidth" style="border-right: none;">
+        {{ conv["name"] }}
+      </a>
+      <a class="list-group-item" href="">
+        <i class="bi bi-pencil"></i>
+      </a>
+      <a class="list-group-item" href="">
+        <i class="bi bi-x-circle"></i>
+      </a>
+    </ul>
+  {% endfor %}
+</main>

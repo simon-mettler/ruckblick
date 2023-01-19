@@ -6,14 +6,21 @@ import inc
 
 
 # Initialize blueprints.
-manage_conversations = Blueprint('manage_conversations', __name__)
-manage_conversation = Blueprint('manage_conversation_form', __name__)
-manage_conversation_import = Blueprint('manage_conversation_form_import', __name__)
+bp_conversation = Blueprint('bp_conversation', __name__)
+bp_conversation_add = Blueprint('bp_conversation_add', __name__)
+bp_conversation_import = Blueprint('bp_conversation_import', __name__)
 
 
-@manage_conversations.route("/manage/conversation/", methods=['GET', 'POST'])
-@manage_conversation_import.route("/manage/conversation/<int:id>/", methods=['GET', 'POST'])
-def m_conversation_import(id=None):
+@bp_conversation.route("/conversation/")
+def p_conversation():
+    conversations = query.get_conversations()
+    return render_template("conversation.html",
+        conversations=conversations)
+
+
+@bp_conversation_import.route("/conversation/import/", methods=['GET', 'POST'])
+@bp_conversation_import.route("/conversation/import/<int:id>", methods=['GET', 'POST'])
+def p_conversation_import(id=None):
     form = forms.ConversationUpload()
     form.conv.choices = [(c['id'], c['name']) for c in query.get_conversations()]
     if request.method == 'POST':
@@ -32,13 +39,13 @@ def m_conversation_import(id=None):
         con.close()
     form.conv.data = id
 
-    return render_template("manage-conversation-import.html",
+    return render_template("conversation-import.html",
     form=form,
     id=id)
 
 
-@manage_conversation.route("/manage/conversation/add/", methods=['GET', 'POST'])
-def m_conversation_add():
+@bp_conversation_add.route("/conversation/add/", methods=['GET', 'POST'])
+def p_conversation_add():
     form = forms.ConversationForm()
     if form.validate_on_submit():
         name = form.name.data
@@ -53,5 +60,5 @@ def m_conversation_add():
         con.commit()
         con.close()
         
-    return render_template("manage-conversation-form.html", 
+    return render_template("conversation-form.html", 
         form = form)
