@@ -1,0 +1,20 @@
+{% include 'header.html' %}
+
+<main class="container mt-5">
+	<div class="container mb-5">
+        <h1>Upload Conversation</h1>
+      </div>
+
+  <form class="mt-5" action = "{{ form_action }}" method = "POST" enctype="multipart/form-data">
+    {{ form.csrf_token }}
+    <div class="mb-3">
+      {{ form.conv.label(class="form-label") }}
+      {{ form.conv(class="form-control") }}
+    </div>
+    <div class="mb-3">
+      {{ form.chat.label(class="form-label") }}
+      {{ form.chat(class="form-control") }}
+    </div>
+    {{ form.submit(class="btn btn-primary") }}
+  </form>
+</main>
