@@ -10,13 +10,16 @@ app.config['SECRET_KEY'] = SECRET_KEY
 import forms
 
 # Import blueprints.
-from manage import * 
+from routes_manage import * 
+from routes_view import * 
 
 
 # Register blueprints.
 app.register_blueprint(bp_conversation)
 app.register_blueprint(bp_conversation_add)
 app.register_blueprint(bp_conversation_import)
+
+app.register_blueprint(bp_conversation_view)
 
 
 if __name__ == "__main__":
